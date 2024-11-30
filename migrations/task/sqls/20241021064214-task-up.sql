@@ -39,6 +39,46 @@ from "USER";
 select * 
 from "USER"
 limit 3;
+--  ████████  █████   █    ████  
+--    █ █   ██    █  █         █ 
+--    █ █████ ███ ███       ███  
+--    █ █   █    ██  █     █     
+--    █ █   █████ █   █    █████ 
+-- ===================== ====================
+-- 2. 組合包方案 CREDIT_PACKAGE、客戶購買課程堂數 CREDIT_PURCHASE
+-- 2-1. 新增：在`CREDIT_PACKAGE` 資料表新增三筆資料，資料需求如下：
+    -- 1. 名稱為 `7 堂組合包方案`，價格為`1,400` 元，堂數為`7`
+    -- 2. 名稱為`14 堂組合包方案`，價格為`2,520` 元，堂數為`14`
+    -- 3. 名稱為 `21 堂組合包方案`，價格為`4,800` 元，堂數為`21`
+insert INTO "CREDIT_PACKAGE" ("name", "price","credit_amount")
+VALUES
+	('7 堂組合包方案', 1400, 7),
+	('14 堂組合包方案', 2520, 14),
+	('21 堂組合包方案', 4800, 21);
+-- 2-2. 新增：在 `CREDIT_PURCHASE` 資料表，新增三筆資料：（請使用 name 欄位做子查詢）
+    -- 1. `王小明` 購買 `14 堂組合包方案`
+    -- 2. `王小明` 購買 `21 堂組合包方案`
+    -- 3. `好野人` 購買 `14 堂組合包方案`
+insert INTO "CREDIT_PURCHASE" ("user_id", "credit_package_id", "purchased_credits", "price_paid")
+VALUES
+	(
+		(select id from "USER" where name = '王小明'), 
+	 	(select id from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+	 	(select credit_amount from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+	 	(select price from "CREDIT_PACKAGE" where name = '14 堂組合包方案')
+	),
+	(
+		(select id from "USER" where name = '王小明'), 
+	 	(select id from "CREDIT_PACKAGE" where name = '21 堂組合包方案'),
+		(select credit_amount from "CREDIT_PACKAGE" where name = '21 堂組合包方案'),
+		(select price from "CREDIT_PACKAGE" where name = '21 堂組合包方案')
+	),
+	(
+		(select id from "USER" where name = '好野人'), 
+	 	(select id from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+	 	(select credit_amount from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
+	 	(select price from "CREDIT_PACKAGE" where name = '14 堂組合包方案')
+	);
 
 
 -- 6-5. 查詢：計算 11 月份有預約課程的會員人數（需使用 Distinct，並用 created_at 和 status 欄位統計）
