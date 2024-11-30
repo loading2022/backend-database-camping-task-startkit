@@ -34,7 +34,7 @@ where email = 'opacity0@hexschooltest.io'
 
 -- 1-4 查詢：取得USER 資料表目前所有用戶數量（提示：使用count函式）
 select COUNT(*) as "用戶數量"
-from "USER";
+from "USER"
 -- 1-5 查詢：取得 USER 資料表所有用戶資料，並列出前 3 筆（提示：使用limit語法）
 select * 
 from "USER"
