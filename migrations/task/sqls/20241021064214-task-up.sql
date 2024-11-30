@@ -61,7 +61,7 @@ VALUES
     -- 2. `王小明` 購買 `21 堂組合包方案`
     -- 3. `好野人` 購買 `14 堂組合包方案`
 insert INTO "CREDIT_PURCHASE" ("user_id", "credit_package_id", "purchased_credits", "price_paid")
-VALUES
+VALUES(
 	(
 		(select id from "USER" where name = '王小明'), 
 	 	(select id from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
@@ -79,8 +79,8 @@ VALUES
 	 	(select id from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
 	 	(select credit_amount from "CREDIT_PACKAGE" where name = '14 堂組合包方案'),
 	 	(select price from "CREDIT_PACKAGE" where name = '14 堂組合包方案')
-	);
-
+	)
+)
 
 -- ████████  █████   █    ████   
 --   █ █   ██    █  █         ██ 
