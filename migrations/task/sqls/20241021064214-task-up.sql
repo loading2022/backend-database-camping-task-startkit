@@ -332,4 +332,4 @@ where EXTRACT(MONTH from "CREDIT_PURCHASE".purchase_at) = 12;
 -- 顯示須包含以下欄位： 預約會員人數
 select COUNT(distinct (user_id)) as "預約會員人數" 
 from "COURSE_BOOKING"
-where EXTRACT(MONTH from created_at) = 12 and status = '即將授課';
+where EXTRACT(MONTH from created_at) = 12 and status != '課程已取消';
